@@ -1,0 +1,23 @@
+﻿<div style="height: 100%; padding-top:150px; background: #f0f2f5;">
+  <article class="card-body" style="width: 450px; margin:auto; border: 1px solid #eee; background: #f7f7f7;">
+    <a routerLink="/auth/register" class="float-right btn btn-outline-primary">Sign up</a>
+    <h4 class="card-title mb-4 mt-1">Sign in</h4>
+    <form nz-form [formGroup]="loginForm" class="login-form"  style="padding: 30px;" (ngSubmit)="doLogin()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="username" placeholder="username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <button nz-button class="login-form-button login-form-margin ant-btn-block" [nzType]="'primary'">Log in</button>
+    </form>
+  </article>
+</div>

@@ -1,0 +1,78 @@
+﻿<nz-page-header class="site-page-header" nzBackIcon nzTitle="Order" nzSubtitle="New order page">
+
+</nz-page-header>
+<nz-card nzTitle="Filters" [nzExtra]="extraTemplate">
+  <form nz-form [formGroup]="validateForm">
+    <nz-row [nzGutter]="16">
+      <nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'productName'">Product</nz-form-label>
+          <input nz-input [formControlName]="'productName'" [attr.id]="'productName'"  [(ngModel)]="searchValue" [nzAutocomplete]="auto">
+          <nz-autocomplete #auto>
+            <nz-auto-option [nzValue]="'12345'">12345</nz-auto-option>
+            <nz-auto-option [nzValue]="'23456'">23456</nz-auto-option>
+            <nz-auto-option [nzValue]="'34567'">34567</nz-auto-option>
+          </nz-autocomplete>
+        </nz-form-item>
+      </nz-col>
+      <nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'productCategory'">Product Category</nz-form-label>
+          <nz-select nzShowSearch nzAllowClear [formControlName]="'productCategory'" [attr.id]="'productCategory'" nzPlaceHolder="Select a person" [(ngModel)]="selectedProductCategoryValue">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </nz-form-item>
+      </nz-col>
+
+      <nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzFor]="'productBrand'">Product Brand</nz-form-label>
+          <nz-select nzShowSearch nzAllowClear [formControlName]="'productBrand'" [attr.id]="'productBrand'" nzPlaceHolder="Select a person" [(ngModel)]="selectedProductBrandValue">
+            <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+            <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+            <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+          </nz-select>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+  </form>
+</nz-card>
+<ng-template #extraTemplate>
+  <button nz-button nzType="primary" nzSize="small" nzShape="round"><i nz-icon nzType="search"></i> Clear</button> &nbsp;
+  <button nz-button nzType="primary" nzSize="small" nzShape="round"><i nz-icon nzType="search"></i> Search</button>
+</ng-template>
+
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col class="gutter-row" [nzSpan]="24">
+    <div class="inner-box">
+      <nz-card nzTitle="Products">
+        <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listOfData" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+          <thead>
+          <tr>
+            <th>Product</th>
+            <th>Buyer</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of rowSelectionTable.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.buyer }}</td>
+            <td>
+              <button (click)="openProductDetail()" nz-button nzType="primary" nzSize="small" nzShape="round"><i nz-icon nzType="eye"></i></button> &nbsp;
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+    </div>
+  </div>
+</div>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="visibleProduct" nzPlacement="right" nzTitle="Orders Detail" (nzOnClose)="closeProductDetail()">
+  <p>Orders detail is empty.</p>
+</nz-drawer>
+
+

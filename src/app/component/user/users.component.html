@@ -1,0 +1,37 @@
+﻿<nz-page-header class="site-page-header" nzBackIcon nzTitle="Users" nzSubtitle="Users page">
+
+</nz-page-header>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col class="gutter-row" [nzSpan]="24">
+    <div class="inner-box">
+      <nz-card nzTitle="Users" [nzExtra]="extraTemplate">
+        <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listOfData" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+          <thead>
+          <tr>
+            <th>Product</th>
+            <th>Buyer</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of rowSelectionTable.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.buyer }}</td>
+            <td>
+              <button nz-button nzType="default" nzSize="small" nzShape="round"><i nz-icon nzType="delete"></i></button> &nbsp;
+              <button nz-button (click)="openUserDetail()" nzType="default" nzSize="small" nzShape="round"><i nz-icon nzType="form" nzTheme="outline"></i></button>
+            </td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </nz-card>
+      <ng-template #extraTemplate>
+        <button (click)="openUserDetail()"  nz-button nzType="primary" nzSize="small" nzShape="round"><i nz-icon nzType="plus"></i> New User</button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<nz-drawer [nzClosable]="false" [nzVisible]="visibleUserDetail" nzPlacement="right" nzTitle="User Details" (nzOnClose)="closeUserDetail()">
+  <p>User details page..</p>
+</nz-drawer>
